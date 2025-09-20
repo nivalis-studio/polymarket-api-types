@@ -353,17 +353,17 @@ export type Comment = {
 };
 
 export type Activity = {
-  proxyWallet: '0x56687bf447db6ffa42ffe2204a05edaa20f55839';
-  timestamp: Maybe<Float>;
-  conditionId: '0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917';
-  type: 'TRADE';
+  proxyWallet: `0x${string}`;
+  timestamp: Maybe<Integer>;
+  conditionId: `0x${string}`;
+  type: 'TRADE' | 'SPLIT' | 'MERGE' | 'REDEEM' | 'REWARD' | 'CONVERSION';
   size: Maybe<Float>;
   usdcSize: Maybe<Float>;
   transactionHash: Maybe<string>;
   price: Maybe<Float>;
   asset: Maybe<string>;
-  side: 'BUY';
-  outcomeIndex: Maybe<Float>;
+  side: 'BUY' | 'SELL';
+  outcomeIndex: Maybe<Integer>;
   title: Maybe<string>;
   slug: Maybe<string>;
   icon: Maybe<string>;
@@ -377,19 +377,19 @@ export type Activity = {
 };
 
 export type Trades = {
-  proxyWallet: '0x56687bf447db6ffa42ffe2204a05edaa20f55839';
-  side: 'BUY';
+  proxyWallet: `0x${string}`;
+  side: 'BUY' | 'SELL';
   asset: Maybe<string>;
-  conditionId: '0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917';
-  size: Maybe<Float>;
-  price: Maybe<Float>;
-  timestamp: Maybe<Float>;
+  conditionId: `0x${string}`;
+  size: Float;
+  price: Float;
+  timestamp: Integer;
   title: Maybe<string>;
   slug: Maybe<string>;
   icon: Maybe<string>;
-  eventSlug: Maybe<string>;
+  eventSlug: string;
   outcome: Maybe<string>;
-  outcomeIndex: Maybe<Float>;
+  outcomeIndex: Maybe<Integer>;
   name: Maybe<string>;
   pseudonym: Maybe<string>;
   bio: Maybe<string>;
