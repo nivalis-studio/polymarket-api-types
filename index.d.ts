@@ -376,7 +376,7 @@ export type Activity = {
   profileImageOptimized: Maybe<string>;
 };
 
-export type Trades = {
+export type Trade = {
   proxyWallet: `0x${string}`;
   side: 'BUY' | 'SELL';
   asset: Maybe<string>;
