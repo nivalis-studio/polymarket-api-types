@@ -4,10 +4,10 @@ type Tagged<Type, TagName extends PropertyKey> = Type & {
   readonly [tag]: { [K in TagName]: never };
 };
 
-type Datetime = Tagged<string, "DateTime">;
-type Integer = Tagged<number, "Int">;
-type Float = Tagged<number, "Float">;
-type Uri = Tagged<string, "Uri">;
+type Datetime = Tagged<string, 'DateTime'>;
+type Integer = Tagged<number, 'Int'>;
+type Float = Tagged<number, 'Float'>;
+type Uri = Tagged<string, 'Uri'>;
 
 type Maybe<T> = T | null | undefined;
 
@@ -353,16 +353,16 @@ export type Comment = {
 };
 
 export type Activity = {
-  proxyWallet: "0x56687bf447db6ffa42ffe2204a05edaa20f55839";
+  proxyWallet: '0x56687bf447db6ffa42ffe2204a05edaa20f55839';
   timestamp: Maybe<Float>;
-  conditionId: "0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917";
-  type: "TRADE";
+  conditionId: '0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917';
+  type: 'TRADE';
   size: Maybe<Float>;
   usdcSize: Maybe<Float>;
   transactionHash: Maybe<string>;
   price: Maybe<Float>;
   asset: Maybe<string>;
-  side: "BUY";
+  side: 'BUY';
   outcomeIndex: Maybe<Float>;
   title: Maybe<string>;
   slug: Maybe<string>;
@@ -377,10 +377,10 @@ export type Activity = {
 };
 
 export type Trades = {
-  proxyWallet: "0x56687bf447db6ffa42ffe2204a05edaa20f55839";
-  side: "BUY";
+  proxyWallet: '0x56687bf447db6ffa42ffe2204a05edaa20f55839';
+  side: 'BUY';
   asset: Maybe<string>;
-  conditionId: "0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917";
+  conditionId: '0xdd22472e552920b8438158ea7238bfadfa4f736aa4cee91a6b86c39ead110917';
   size: Maybe<Float>;
   price: Maybe<Float>;
   timestamp: Maybe<Float>;
