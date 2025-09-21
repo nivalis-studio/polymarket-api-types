@@ -4,10 +4,10 @@ type Tagged<Type, TagName extends PropertyKey> = Type & {
   readonly [tag]: { [K in TagName]: never };
 };
 
-type Datetime = Tagged<string, "DateTime">;
-type Integer = Tagged<number, "Int">;
-type Float = Tagged<number, "Float">;
-type Uri = Tagged<string, "Uri">;
+type Datetime = Tagged<string, 'DateTime'>;
+type Integer = Tagged<number, 'Int'>;
+type Float = Tagged<number, 'Float'>;
+type Uri = Tagged<string, 'Uri'>;
 
 type Maybe<T> = T | null | undefined;
 
@@ -74,8 +74,10 @@ export type Event = {
   closedTime: Maybe<Datetime>;
   collections: Array<Collection>;
   commentCount: Maybe<Integer>;
+  color: Maybe<string>;
   commentsEnabled: Maybe<boolean>;
   competitive: Maybe<Float>;
+  countryName: Maybe<string>;
   createdAt: Maybe<Datetime>;
   createdBy: Maybe<string>;
   creationDate: Maybe<Datetime>;
@@ -85,6 +87,7 @@ export type Event = {
   description: Maybe<string>;
   disqusThread: Maybe<string>;
   elapsed: Maybe<string>;
+  electionType: Maybe<string>;
   enableNegRisk: Maybe<boolean>;
   enableOrderBook: Maybe<boolean>;
   endDate: Maybe<Datetime>;
@@ -99,6 +102,7 @@ export type Event = {
   featuredImageOptimized: Maybe<ImageOptimized>;
   featuredOrder: Maybe<Integer>;
   finishedTimestamp: Maybe<Datetime>;
+  gameId: Maybe<Float>;
   gameStatus: Maybe<string>;
   gmpChartMode: Maybe<string>;
   icon: Maybe<string>;
@@ -113,11 +117,13 @@ export type Event = {
   live: Maybe<boolean>;
   markets: Array<Market>;
   negRisk: Maybe<boolean>;
+  negRiskAugmented: Maybe<boolean>;
   negRiskFeeBips: Maybe<Float>;
   negRiskMarketID: Maybe<string>;
   new: Maybe<boolean>;
   openInterest: Maybe<Float>;
   parentEvent: Maybe<string>;
+  parentEventId: Maybe<Float>;
   pendingDeployment: Maybe<boolean>;
   period: Maybe<string>;
   published_at: Maybe<string>;
@@ -129,7 +135,7 @@ export type Event = {
   seriesSlug: Maybe<string>;
   showAllOutcomes: Maybe<boolean>;
   showMarketImages: Maybe<boolean>;
-  slug: Maybe<string>;
+  slug: string;
   sortBy: Maybe<string>;
   spreadsMainLine: Maybe<Float>;
   startDate: Maybe<Datetime>;
@@ -141,7 +147,7 @@ export type Event = {
   templateVariables: Maybe<string>;
   templates: Array<Template>;
   ticker: Maybe<string>;
-  title: Maybe<string>;
+  title: string;
   totalsMainLine: Maybe<Float>;
   tweetCount: Maybe<Integer>;
   updatedAt: Maybe<Datetime>;
@@ -158,6 +164,7 @@ export type Market = {
   acceptingOrdersTimestamp: Maybe<Datetime>;
   active: Maybe<boolean>;
   ammType: Maybe<string>;
+  approved: Maybe<boolean>;
   archived: Maybe<boolean>;
   automaticallyActive: Maybe<boolean>;
   automaticallyResolved: Maybe<boolean>;
@@ -165,19 +172,22 @@ export type Market = {
   bestBid: Maybe<Float>;
   categories: Array<Category>;
   category: Maybe<string>;
+  categoryMailchimpTag: Maybe<string>;
   chartColor: Maybe<string>;
   clearBookOnStart: Maybe<boolean>;
+  clobRewards: Maybe<Array<unknown>>;
   clobTokenIds: Maybe<string>;
   closed: Maybe<boolean>;
   closedTime: Maybe<string>;
   commentsEnabled: Maybe<boolean>;
   competitive: Maybe<Float>;
-  conditionId: Maybe<string>;
+  conditionId: string;
   createdAt: Maybe<Datetime>;
   createdBy: Maybe<Float>;
   creator: Maybe<string>;
   curationOrder: Maybe<Integer>;
   customLiveness: Maybe<Integer>;
+  cyom: Maybe<boolean>;
   denominationToken: Maybe<string>;
   deploying: Maybe<boolean>;
   deployingTimestamp: Maybe<Datetime>;
@@ -190,6 +200,7 @@ export type Market = {
   events: Array<Event>;
   featured: Maybe<boolean>;
   fee: Maybe<string>;
+  feesEnabled: Maybe<boolean>;
   formatType: Maybe<string>;
   fpmmLive: Maybe<boolean>;
   funded: Maybe<boolean>;
@@ -200,9 +211,10 @@ export type Market = {
   groupItemThreshold: Maybe<string>;
   groupItemTitle: Maybe<string>;
   hasReviewedDates: Maybe<boolean>;
+  holdingRewardsEnabled: Maybe<boolean>;
   icon: Maybe<string>;
   iconOptimized: Maybe<ImageOptimized>;
-  id: Maybe<string>;
+  id: string;
   image: Maybe<string>;
   imageOptimized: Maybe<ImageOptimized>;
   lastTradePrice: Maybe<Float>;
@@ -219,7 +231,10 @@ export type Market = {
   marketGroup: Maybe<Integer>;
   marketMakerAddress: Maybe<string>;
   marketType: Maybe<string>;
+  negRisk: Maybe<boolean>;
+  negRiskMarketID: Maybe<string>;
   negRiskOther: Maybe<boolean>;
+  negRiskRequestID: Maybe<string>;
   new: Maybe<boolean>;
   notificationsEnabled: Maybe<boolean>;
   oneDayPriceChange: Maybe<Float>;
@@ -231,9 +246,10 @@ export type Market = {
   orderPriceMinTickSize: Maybe<Float>;
   outcomePrices: Maybe<string>;
   outcomes: Maybe<string>;
+  pagerDutyNotificationEnabled: Maybe<boolean>;
   pastSlugs: Maybe<string>;
   pendingDeployment: Maybe<boolean>;
-  question: Maybe<string>;
+  question: string;
   questionID: Maybe<string>;
   ready: Maybe<boolean>;
   readyForCron: Maybe<boolean>;
@@ -247,22 +263,29 @@ export type Market = {
   scheduledDeploymentTimestamp: Maybe<Datetime>;
   score: Maybe<Integer>;
   secondsDelay: Maybe<Integer>;
+  sentDiscord: Maybe<boolean>;
   seriesColor: Maybe<string>;
   shortOutcomes: Maybe<string>;
   showGmpOutcome: Maybe<boolean>;
   showGmpSeries: Maybe<boolean>;
-  slug: Maybe<string>;
+  slug: string;
   sponsorImage: Maybe<string>;
   sponsorName: Maybe<string>;
   sportsMarketType: Maybe<string>;
   spread: Maybe<Float>;
   startDate: Maybe<Datetime>;
   startDateIso: Maybe<string>;
+  subcategory: Maybe<string>;
+  submitted_by: Maybe<string>;
   tags: Array<Tag>;
+  takerBaseFee: Maybe<Float>;
   takerBaseFee: Maybe<Integer>;
   teamAID: Maybe<string>;
   teamBID: Maybe<string>;
   twitterCardImage: Maybe<string>;
+  twitterCardLastRefreshed: Maybe<string>;
+  twitterCardLastValidated: Maybe<string>;
+  twitterCardLocation: Maybe<string>;
   umaBond: Maybe<string>;
   umaEndDate: Maybe<string>;
   umaEndDateIso: Maybe<string>;
@@ -366,13 +389,13 @@ export type Activity = {
   profileImageOptimized: Maybe<string>;
   proxyWallet: `0x${string}`;
   pseudonym: Maybe<string>;
-  side: "BUY" | "SELL";
+  side: 'BUY' | 'SELL';
   size: Maybe<Float>;
   slug: Maybe<string>;
   timestamp: Maybe<Integer>;
   title: Maybe<string>;
   transactionHash: Maybe<string>;
-  type: "TRADE" | "SPLIT" | "MERGE" | "REDEEM" | "REWARD" | "CONVERSION";
+  type: 'TRADE' | 'SPLIT' | 'MERGE' | 'REDEEM' | 'REWARD' | 'CONVERSION';
   usdcSize: Maybe<Float>;
 };
 
@@ -390,12 +413,13 @@ export type Trade = {
   profileImageOptimized: Maybe<string>;
   proxyWallet: `0x${string}`;
   pseudonym: Maybe<string>;
-  side: "BUY" | "SELL";
+  side: 'BUY' | 'SELL';
   size: Float;
   slug: Maybe<string>;
   timestamp: Integer;
   title: Maybe<string>;
   transactionHash: Maybe<string>;
+  transactionHash: string;
 };
 
 export type Category = {
