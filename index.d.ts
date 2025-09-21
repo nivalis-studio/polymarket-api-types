@@ -14,14 +14,14 @@ type Maybe<T> = T | null | undefined;
 export type Team = {
   abbreviation: Maybe<string>;
   alias: Maybe<string>;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   id: Integer;
   league: Maybe<string>;
   logo: Maybe<string>;
   name: Maybe<string>;
   providerId: Maybe<string>;
   record: Maybe<string>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
 };
 
 export type Sport = {
@@ -34,7 +34,7 @@ export type Sport = {
 };
 
 export type Tag = {
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   createdBy: Maybe<Integer>;
   forceHide: Maybe<boolean>;
   forceShow: Maybe<boolean>;
@@ -43,7 +43,7 @@ export type Tag = {
   label: Maybe<string>;
   publishedAt: Maybe<string>;
   slug: Maybe<string>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   updatedBy: Maybe<Integer>;
 };
 
@@ -78,7 +78,7 @@ export type Event = {
   commentsEnabled: Maybe<boolean>;
   competitive: Maybe<Float>;
   countryName: Maybe<string>;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   createdBy: Maybe<string>;
   creationDate: Maybe<Datetime>;
   cyom: Maybe<boolean>;
@@ -150,7 +150,7 @@ export type Event = {
   title: string;
   totalsMainLine: Maybe<Float>;
   tweetCount: Maybe<Integer>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   updatedBy: Maybe<string>;
   volume1mo: Maybe<Float>;
   volume1wk: Maybe<Float>;
@@ -175,14 +175,14 @@ export type Market = {
   categoryMailchimpTag: Maybe<string>;
   chartColor: Maybe<string>;
   clearBookOnStart: Maybe<boolean>;
-  clobRewards: Maybe<Array<unknown>>;
+  clobRewards: Maybe<Array<ClobReward>>;
   clobTokenIds: Maybe<string>;
   closed: Maybe<boolean>;
   closedTime: Maybe<string>;
   commentsEnabled: Maybe<boolean>;
   competitive: Maybe<Float>;
   conditionId: string;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   createdBy: Maybe<Float>;
   creator: Maybe<string>;
   curationOrder: Maybe<Integer>;
@@ -292,7 +292,7 @@ export type Market = {
   umaResolutionStatus: Maybe<string>;
   umaResolutionStatuses: Maybe<string>;
   umaReward: Maybe<string>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   updatedBy: Maybe<Float>;
   upperBound: Maybe<string>;
   upperBoundDate: Maybe<string>;
@@ -328,7 +328,7 @@ export type Serie = {
   commentCount: Maybe<Integer>;
   commentsEnabled: Maybe<boolean>;
   competitive: Maybe<string>;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   createdBy: Maybe<string>;
   description: Maybe<string>;
   events: Array<Event>;
@@ -353,7 +353,7 @@ export type Serie = {
   templateVariables: Maybe<boolean>;
   ticker: Maybe<string>;
   title: Maybe<string>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   updatedBy: Maybe<string>;
   volume24hr: Maybe<Float>;
   volume: Maybe<Float>;
@@ -361,7 +361,7 @@ export type Serie = {
 
 export type Comment = {
   body: Maybe<string>;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   id: string;
   parentCommentID: Maybe<string>;
   parentEntityID: Maybe<Integer>;
@@ -371,7 +371,7 @@ export type Comment = {
   reactions: Array<Reaction>;
   replyAddress: Maybe<string>;
   reportCount: Maybe<Integer>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   userAddress: Maybe<string>;
 };
 
@@ -423,14 +423,14 @@ export type Trade = {
 };
 
 export type Category = {
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   createdBy: Maybe<string>;
   id: string;
   label: Maybe<string>;
   parentCategory: Maybe<string>;
   publishedAt: Maybe<string>;
   slug: Maybe<string>;
-  updatedAt: Maybe<Datetime>;
+  updatedAt: Datetime;
   updatedBy: Maybe<string>;
 };
 
@@ -459,7 +459,7 @@ export type Reaction = {
   reactionType: Maybe<string>;
   icon: Maybe<string>;
   userAddress: Maybe<string>;
-  createdAt: Maybe<Datetime>;
+  createdAt: Datetime;
   profile: Profile;
 };
 
@@ -497,8 +497,8 @@ export type Collection = {
   publishedAt: Maybe<string>;
   createdBy: Maybe<string>;
   updatedBy: Maybe<string>;
-  createdAt: Maybe<Datetime>;
-  updatedAt: Maybe<Datetime>;
+  createdAt: Datetime;
+  updatedAt: Datetime;
   commentsEnabled: Maybe<boolean>;
   imageOptimized: Maybe<ImageOptimized>;
   iconOptimized: Maybe<ImageOptimized>;
@@ -526,6 +526,8 @@ export type EventCreator = {
   creatorHandle: Maybe<string>;
   creatorUrl: Maybe<string>;
   creatorImage: Maybe<string>;
-  createdAt: Maybe<Datetime>;
-  updatedAt: Maybe<Datetime>;
+  createdAt: Datetime;
+  updatedAt: Datetime;
 };
+
+export type ClobReward = unknown;
