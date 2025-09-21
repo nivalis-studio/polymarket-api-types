@@ -1,7 +1,8 @@
-declare const tag: unique symbol;
+declare const Tag: unique symbol;
+declare const Optional: unique symbol;
 
 type Tagged<Type, TagName extends PropertyKey> = Type & {
-  readonly [tag]: { [K in TagName]: never };
+  readonly [Tag]: { [K in TagName]: never };
 };
 
 type Datetime = Tagged<string, 'DateTime'>;
@@ -9,9 +10,18 @@ type Integer = Tagged<number, 'Int'>;
 type Float = Tagged<number, 'Float'>;
 type Uri = Tagged<string, 'Uri'>;
 
-type Maybe<T> = T | null | undefined;
+type Marker = { [Optional]?: true };
+type Maybe<T> = (T | null) | Marker;
+type IsMaybe<T> = [Marker] extends [T] ? true : false;
+type Unmaybe<T> = Exclude<T, Marker>;
 
-export type Team = {
+type NormalizeMaybes<T> = {
+  [K in keyof T as IsMaybe<T[K]> extends true ? K : never]?: Unmaybe<T[K]>;
+} & {
+  [K in keyof T as IsMaybe<T[K]> extends true ? never : K]-?: T[K];
+};
+
+export type Team = NormalizeMaybes<{
   abbreviation: Maybe<string>;
   alias: Maybe<string>;
   createdAt: Datetime;
@@ -22,18 +32,18 @@ export type Team = {
   providerId: Maybe<string>;
   record: Maybe<string>;
   updatedAt: Datetime;
-};
+}>;
 
-export type Sport = {
+export type Sport = NormalizeMaybes<{
   image: Uri;
   ordering: string;
   resolution: Uri;
   series: string;
   sport: string;
   tags: string;
-};
+}>;
 
-export type Tag = {
+export type Tag = NormalizeMaybes<{
   createdAt: Datetime;
   createdBy: Maybe<Integer>;
   forceHide: Maybe<boolean>;
@@ -45,9 +55,9 @@ export type Tag = {
   slug: Maybe<string>;
   updatedAt: Datetime;
   updatedBy: Maybe<Integer>;
-};
+}>;
 
-export type ImageOptimized = {
+export type ImageOptimized = NormalizeMaybes<{
   field: Maybe<string>;
   id: string;
   imageOptimizedComplete: Maybe<boolean>;
@@ -58,9 +68,9 @@ export type ImageOptimized = {
   imageUrlSource: Maybe<string>;
   relId: Maybe<Integer>;
   relname: Maybe<string>;
-};
+}>;
 
-export type Event = {
+export type Event = NormalizeMaybes<{
   active: Maybe<boolean>;
   archived: Maybe<boolean>;
   automaticallyActive: Maybe<boolean>;
@@ -157,9 +167,9 @@ export type Event = {
   volume1yr: Maybe<Float>;
   volume24hr: Maybe<Float>;
   volume: Maybe<Float>;
-};
+}>;
 
-export type Market = {
+export type Market = NormalizeMaybes<{
   acceptingOrders: Maybe<boolean>;
   acceptingOrdersTimestamp: Maybe<Datetime>;
   active: Maybe<boolean>;
@@ -278,7 +288,6 @@ export type Market = {
   subcategory: Maybe<string>;
   submitted_by: Maybe<string>;
   tags: Array<Tag>;
-  takerBaseFee: Maybe<Float>;
   takerBaseFee: Maybe<Integer>;
   teamAID: Maybe<string>;
   teamBID: Maybe<string>;
@@ -315,9 +324,9 @@ export type Market = {
   wideFormat: Maybe<boolean>;
   xAxisValue: Maybe<string>;
   yAxisValue: Maybe<string>;
-};
+}>;
 
-export type Serie = {
+export type Serie = NormalizeMaybes<{
   active: Maybe<boolean>;
   archived: Maybe<boolean>;
   categories: Array<Category>;
@@ -357,9 +366,9 @@ export type Serie = {
   updatedBy: Maybe<string>;
   volume24hr: Maybe<Float>;
   volume: Maybe<Float>;
-};
+}>;
 
-export type Comment = {
+export type Comment = NormalizeMaybes<{
   body: Maybe<string>;
   createdAt: Datetime;
   id: string;
@@ -373,9 +382,9 @@ export type Comment = {
   reportCount: Maybe<Integer>;
   updatedAt: Datetime;
   userAddress: Maybe<string>;
-};
+}>;
 
-export type Activity = {
+export type Activity = NormalizeMaybes<{
   asset: Maybe<string>;
   bio: Maybe<string>;
   conditionId: `0x${string}`;
@@ -394,12 +403,12 @@ export type Activity = {
   slug: Maybe<string>;
   timestamp: Maybe<Integer>;
   title: Maybe<string>;
-  transactionHash: Maybe<string>;
+  transactionHash: string;
   type: 'TRADE' | 'SPLIT' | 'MERGE' | 'REDEEM' | 'REWARD' | 'CONVERSION';
   usdcSize: Maybe<Float>;
-};
+}>;
 
-export type Trade = {
+export type Trade = NormalizeMaybes<{
   asset: Maybe<string>;
   bio: Maybe<string>;
   conditionId: `0x${string}`;
@@ -418,11 +427,10 @@ export type Trade = {
   slug: Maybe<string>;
   timestamp: Integer;
   title: Maybe<string>;
-  transactionHash: Maybe<string>;
   transactionHash: string;
-};
+}>;
 
-export type Category = {
+export type Category = NormalizeMaybes<{
   createdAt: Datetime;
   createdBy: Maybe<string>;
   id: string;
@@ -432,9 +440,9 @@ export type Category = {
   slug: Maybe<string>;
   updatedAt: Datetime;
   updatedBy: Maybe<string>;
-};
+}>;
 
-export type Profile = {
+export type Profile = NormalizeMaybes<{
   baseAddress: Maybe<string>;
   bio: Maybe<string>;
   displayUsernamePublic: Maybe<boolean>;
@@ -446,14 +454,14 @@ export type Profile = {
   profileImageOptimized: Maybe<ImageOptimized>;
   proxyWallet: Maybe<string>;
   pseudonym: Maybe<string>;
-};
+}>;
 
-export type Position = {
+export type Position = NormalizeMaybes<{
   tokenId: Maybe<string>;
   positionSize: Maybe<string>;
-};
+}>;
 
-export type Reaction = {
+export type Reaction = NormalizeMaybes<{
   id: string;
   commentID: Maybe<Integer>;
   reactionType: Maybe<string>;
@@ -461,9 +469,9 @@ export type Reaction = {
   userAddress: Maybe<string>;
   createdAt: Datetime;
   profile: Profile;
-};
+}>;
 
-export type Chat = {
+export type Chat = NormalizeMaybes<{
   id: string;
   channelId: Maybe<string>;
   channelName: Maybe<string>;
@@ -471,9 +479,9 @@ export type Chat = {
   live: Maybe<boolean>;
   startTime: Maybe<Datetime>;
   endTime: Maybe<Datetime>;
-};
+}>;
 
-export type Collection = {
+export type Collection = NormalizeMaybes<{
   id: string;
   ticker: Maybe<string>;
   slug: Maybe<string>;
@@ -503,9 +511,9 @@ export type Collection = {
   imageOptimized: Maybe<ImageOptimized>;
   iconOptimized: Maybe<ImageOptimized>;
   headerImageOptimized: Maybe<ImageOptimized>;
-};
+}>;
 
-export type Template = {
+export type Template = NormalizeMaybes<{
   id: string;
   eventTitle: Maybe<string>;
   eventSlug: Maybe<string>;
@@ -518,9 +526,9 @@ export type Template = {
   showMarketImages: Maybe<boolean>;
   seriesSlug: Maybe<string>;
   outcomes: Maybe<string>;
-};
+}>;
 
-export type EventCreator = {
+export type EventCreator = NormalizeMaybes<{
   id: string;
   creatorName: Maybe<string>;
   creatorHandle: Maybe<string>;
@@ -528,6 +536,6 @@ export type EventCreator = {
   creatorImage: Maybe<string>;
   createdAt: Datetime;
   updatedAt: Datetime;
-};
+}>;
 
 export type ClobReward = unknown;
