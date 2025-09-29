@@ -539,3 +539,22 @@ export type EventCreator = NormalizeMaybes<{
 }>;
 
 export type ClobReward = unknown;
+
+export type ClosedPosition = NormalizeMaybes<{
+  proxyWallet: `0x${string}`;
+  asset: string;
+  conditionId: `0x${string}`;
+  avgPrice: Float;
+  totalBought: Float;
+  realizedPnl: Float;
+  curPrice: Maybe<Float>;
+  title: string;
+  slug: string;
+  icon: string;
+  eventSlug: string;
+  outcome: string;
+  outcomeIndex: Integer;
+  oppositeOutcome: string;
+  oppositeAsset: string;
+  endDate: string;
+}>;
