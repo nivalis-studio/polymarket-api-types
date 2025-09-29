@@ -16,21 +16,13 @@ TypeScript type definitions for the Polymarket API, providing comprehensive type
 ## Installation
 
 ```bash
-npm install @nivalis/polymarket-api-types
-```
-
-Or with your preferred package manager:
-
-```bash
-pnpm add @nivalis/polymarket-api-types
-bun add @nivalis/polymarket-api-types
-yarn add @nivalis/polymarket-api-types
+pnpm install -D @nivalis/polymarket-api-types
 ```
 
 ## Usage
 
 ```typescript
-import type { Event, Market, Trade, Profile } from '@nivalis/polymarket-api-types';
+import type { Event, Market, Trade, Profile } from "@nivalis/polymarket-api-types";
 
 // Use types for API responses
 const event: Event = {
@@ -73,10 +65,10 @@ This library uses an advanced TypeScript pattern for enhanced type safety:
 ### Branded Types
 
 ```typescript
-type Datetime = Tagged<string, 'DateTime'>;
-type Integer = Tagged<number, 'Int'>;
-type Float = Tagged<number, 'Float'>;
-type Uri = Tagged<string, 'Uri'>;
+type Datetime = Tagged<string, "DateTime">;
+type Integer = Tagged<number, "Int">;
+type Float = Tagged<number, "Float">;
+type Uri = Tagged<string, "Uri">;
 ```
 
 ### Smart Optional Properties
@@ -89,63 +81,8 @@ type RawEvent = {
   id: string;
   title: string;
   description: Maybe<string>; // Optional
-  featured: Maybe<boolean>;   // Optional
+  featured: Maybe<boolean>; // Optional
 };
-
-// Exported as
-export type Event = NormalizeMaybes<RawEvent>;
-// Results in: { id: string; title: string; description?: string; featured?: boolean; }
-```
-
-### Blockchain Types
-
-Ethereum addresses and transaction hashes use template literal types:
-
-```typescript
-type Address = `0x${string}`;
-type TransactionHash = `0x${string}`;
-```
-
-## Available Types
-
-### Core Entities
-- `Event` - Prediction market events
-- `Market` - Individual markets within events  
-- `Trade` - Trading transactions
-- `Activity` - User activity feed items
-- `Profile` - User profiles
-- `Position` - User positions
-
-### Supporting Types
-- `Category` - Market categories
-- `Collection` - Event collections
-- `Series` - Event series
-- `Team` - Sports teams
-- `Sport` - Sports metadata
-- `Tag` - Content tags
-- `Comment` - User comments
-- `Reaction` - Comment reactions
-- `Chat` - Chat channels
-- `Template` - Event templates
-
-### Utility Types
-- `ImageOptimized` - Optimized image metadata
-- `EventCreator` - Event creator information
-- `ClobReward` - CLOB reward data
-
-## Development
-
-This is a pure TypeScript declarations package. To contribute:
-
-```bash
-# Install dependencies
-pnpm install
-
-# Lint and format
-pnpm run lint:fix
-
-# Type check
-pnpm run ts
 ```
 
 ## License
