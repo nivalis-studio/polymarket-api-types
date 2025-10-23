@@ -340,7 +340,7 @@ export type Serie = NormalizeMaybes<{
   createdAt: Datetime;
   createdBy: Maybe<string>;
   description: Maybe<string>;
-  events: Array<Event>;
+  events: Array<Omit<Event, 'markets' | 'series' | 'eventCreators'>>;
   featured: Maybe<boolean>;
   icon: Maybe<string>;
   id: string;
