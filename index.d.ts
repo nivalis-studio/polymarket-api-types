@@ -456,6 +456,19 @@ export type Profile = NormalizeMaybes<{
   pseudonym: Maybe<string>;
 }>;
 
+export type Holder = NormalizeMaybes<{
+  proxyWallet: `0x${string}`;
+  bio: Maybe<string>;
+  asset: string;
+  pseudonym: Maybe<string>;
+  amount: Integer;
+  displayUsernamePublic: Maybe<boolean>;
+  outcomeIndex: Integer;
+  name: Maybe<string>;
+  profileImage: Maybe<string>;
+  profileImageOptimized: Maybe<ImageOptimized>;
+}>;
+
 export type Position = NormalizeMaybes<{
   tokenId: Maybe<string>;
   positionSize: Maybe<string>;
